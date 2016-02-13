@@ -11,6 +11,14 @@
   		"js": ["src/content.js"]
   	}
   ],
+  "browser_action": {
+          // "default_icon": {                    // optional
+          //   "19": "images/icon19.png",           // optional
+          //   "38": "images/icon38.png"            // optional
+          // },
+          "default_title": "fluffy-octo-enigma",      // optional; shown in tooltip
+          "default_popup": "src/main.html"        // optional
+        },
   "background": {
   	"scripts": [
   		"src/bg/background.js"
