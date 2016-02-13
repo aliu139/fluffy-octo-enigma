@@ -1,5 +1,24 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
   "name": "fluffy-octo-enigma",
-  "version": "0.1"
+  "version": "0.1",
+  "description": "temp",
+  "content_scripts":[
+  	{
+  		"matches": [
+  			"<all_urls>"
+  		],
+  		"js": ["src/content.js"]
+  	}
+  ],
+  "background": {
+  	"scripts": [
+  		"src/bg/background.js"
+  	],
+  	"persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+        "tabs"
+    ]
 }
