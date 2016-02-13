@@ -2,6 +2,8 @@ var lastTime;
 var lastPage = "not";
 var totalTime = 0;
 
+var stillOnFb = false;
+
 var maxTime = 4000;
 
 var getUrl = function (callback) {chrome.tabs.query({"active": true}, function(tabs){
@@ -50,3 +52,18 @@ chrome.tabs.onActivated.addListener(function(tabs){
 
 	});
 });
+
+//for second timing
+var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+	chrome.tabs.getCurrent(function(tab){
+		var url = getUrl(function(currentUrl){
+			if (isFB(currentUrl) && isFB(lastPage)){
+				stillOnFb = true;
+				console.log("still true");
+			}
+			stillOnFb = false;
+		})
+	});
+};
