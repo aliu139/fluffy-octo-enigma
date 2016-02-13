@@ -1,26 +1,38 @@
 var lastTime;
+var lastPage = "not";
+var totalTime = 0;
 
-var getUrl = function () {chrome.tabs.query({"active": true}, function(tabs){
+var getUrl = function (callback) {chrome.tabs.query({"active": true}, function(tabs){
 	var currentUrl =  tabs[0].url;
-	console.log(currentUrl);
-	return currentUrl;
+	callback(currentUrl);
 })};
 
-chrome.tabs.onActivated.addListener(function(tabs){
-	var currentUrl = getUrl();
-	if(lastTime){
-		var temp = new Date();
-		var temp_s = temp.getTime();
-		var diff = temp_s - lastTime;
+var isFB = function(input) {
+	if((input.indexOf("www.facebook.com/") != -1)){
+		return true;
+	}
+	return false;
+}
 
-		lastTime = temp_s;
-		
-		console.log(diff);
-	}
-	else{
-		var temp = new Date();
-		var temp_s = temp.getTime();
-		lastTime = temp_s;
-		// console.log("starting timer: " + temp_s);
-	}
+chrome.tabs.onActivated.addListener(function(tabs){
+	var url = getUrl(function(currentUrl){
+		if(isFB(currentUrl) && !isFB(lastPage)){
+			var temp = new Date();
+			var temp_s = temp.getTime();
+			lastTime = temp_s;
+			lastPage = currentUrl;
+		}
+		else if (!isFB(currentUrl) && isFB(lastPage)){
+			var temp = new Date();
+			var temp_s = temp.getTime();
+			var diff = temp_s - lastTime;
+
+			lastTime = temp_s;
+			
+			console.log(diff);
+			totalTime = totalTime + diff;
+			console.log("Total time: " + totalTime);
+			lastPage = currentUrl;
+		}
+	});
 });
