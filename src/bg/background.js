@@ -2,6 +2,8 @@ var lastTime;
 var lastPage = "not";
 var totalTime = 0;
 
+var maxTime = 4000;
+
 var getUrl = function (callback) {chrome.tabs.query({"active": true}, function(tabs){
 	var currentUrl =  tabs[0].url;
 	callback(currentUrl);
@@ -22,6 +24,10 @@ chrome.tabs.onActivated.addListener(function(tabs){
 		if(isFB(currentUrl) && !isFB(lastPage)){
 			lastTime = temp_s;
 			lastPage = currentUrl;
+
+			if (totalTime > maxTime){
+				alert('Stop looking at FB');
+			}
 		}
 		else if (!isFB(currentUrl) && isFB(lastPage)){
 			var diff = temp_s - lastTime;
@@ -32,5 +38,6 @@ chrome.tabs.onActivated.addListener(function(tabs){
 			console.log("Total time: " + totalTime);
 			lastPage = currentUrl;
 		}
+
 	});
 });
