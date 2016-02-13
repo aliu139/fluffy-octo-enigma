@@ -42,9 +42,15 @@ function myTimer() {
 		var url = getUrl(function(currentUrl){
 			if (isFB(currentUrl) && isFB(lastPage)){
 				stillOnFb = true;
-				console.log("still true");
-				totalTime+=1;
+				totalTime+=1;	
 
+				chrome.storage.local.set({"totalTime": totalTime}, function() {
+        			console.log("tried to set totalTime to "  + totalTime);
+    			});
+				chrome.storage.local.get("totalTime", function(data){
+					console.log("attampted to grab: " + data.totalTime);
+				});
+  
 				if (totalTime > maxTime){
 					alert('Stop looking at FB');
 				}

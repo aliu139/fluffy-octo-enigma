@@ -8,8 +8,8 @@
   		"matches": [
   			"<all_urls>"
   		],
-  		"js": ["src/content.js"],
-  		"css": ["src/main.css", "src/clock/flipclock.css"]
+  		"js": ["src/content.js", "res/flipclock.min.js", "src/clock/clock.js"],
+  		"css": ["src/main.css", "src/clock/flipclock.css", "res/bootstrap.min.css"]
   	}
   ],
   "browser_action": {
@@ -23,8 +23,7 @@
   "background": {
   	"scripts": [
   		"src/bg/background.js",
-  		"res/jquery-2.2.0.min.js",
-  		"res/flipclock.min.js"
+  		"res/jquery-2.2.0.min.js"
   	],
   	"persistent": true
   },
