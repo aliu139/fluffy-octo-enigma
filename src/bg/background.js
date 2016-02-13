@@ -16,17 +16,15 @@ var isFB = function(input) {
 
 chrome.tabs.onActivated.addListener(function(tabs){
 	var url = getUrl(function(currentUrl){
+		var temp = new Date();
+		var temp_s = temp.getTime();
+
 		if(isFB(currentUrl) && !isFB(lastPage)){
-			var temp = new Date();
-			var temp_s = temp.getTime();
 			lastTime = temp_s;
 			lastPage = currentUrl;
 		}
 		else if (!isFB(currentUrl) && isFB(lastPage)){
-			var temp = new Date();
-			var temp_s = temp.getTime();
 			var diff = temp_s - lastTime;
-
 			lastTime = temp_s;
 			
 			console.log(diff);
