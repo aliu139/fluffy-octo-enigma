@@ -9,12 +9,16 @@ var getUrl = function (callback) {chrome.tabs.query({"active": true}, function(t
 	callback(currentUrl);
 })};
 
-var isFB = function(input) {
-	if((input.indexOf("www.facebook.com/") != -1)){
+var isWebsite = function(web, input) {
+	if((input.indexOf(web) != -1)){
 		return true;
 	}
 	return false;
-}
+};
+
+var isFB = function(input) {
+	return isWebsite("www.facebook.com/", input);
+};
 
 chrome.tabs.onActivated.addListener(function(tabs){
 	var url = getUrl(function(currentUrl){
@@ -36,6 +40,11 @@ chrome.tabs.onActivated.addListener(function(tabs){
 			console.log(diff);
 			totalTime = totalTime + diff;
 			console.log("Total time: " + totalTime);
+			chrome.storage.sync.set({'time': totalTime}, function() {
+          		// Notify that we saved.
+          		// message('Settings saved');
+          		console.log("time set as " + totalTime);
+        	});
 			lastPage = currentUrl;
 		}
 
