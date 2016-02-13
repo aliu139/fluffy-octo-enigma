@@ -8,7 +8,8 @@
   		"matches": [
   			"<all_urls>"
   		],
-  		"js": ["src/content.js"]
+  		"js": ["src/content.js"],
+  		"css": ["src/main.css", "src/clock/flipclock.css"]
   	}
   ],
   "browser_action": {
@@ -21,7 +22,9 @@
         },
   "background": {
   	"scripts": [
-  		"src/bg/background.js"
+  		"src/bg/background.js",
+  		"res/jquery-2.2.0.min.js",
+  		"res/flipclock.min.js"
   	],
   	"persistent": true
   },
