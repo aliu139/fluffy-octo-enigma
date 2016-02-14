@@ -5,12 +5,17 @@
 		<link rel="stylesheet" href="main.css">
 	</head>
 	<body>
-		<div class="jumbotron">
+		<div style="padding-left: 20px; margin-bottom: 35px; margin-top: 0px; height: 40%">
 			<h2> FB Clock Thing </h2>
 			<!-- <p id="clock">0</p> -->
-			<div class="your-clock"></div>
+			<div class="your-clock" style="padding-top: 16px;"></div>
+
+			<div class="input-group" style="margin-bottom:15px;">
+				<input type="text" class="form-control" placeholder="Maximum Time Allowed">
+				<span class="input-group-addon" id="maxSub"> Submit </span>
+			</div>
 		</div>
-		
+
 		<script src="../res/jquery-2.2.0.min.js"></script>
 		<script src="../res/flipclock.min.js"></script>
 		<script src="clock/clock.js"></script>

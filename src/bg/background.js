@@ -4,7 +4,12 @@ var totalTime = 0;
 
 var stillOnFb = false;
 
-var maxTime = 30;
+var maxTime = 100;
+
+var setMaxTime = function(time){
+	console.log("click " + time);
+	maxTime = time;
+}
 
 var getUrl = function (callback) {chrome.tabs.query({"active": true}, function(tabs){
 	var currentUrl =  tabs[0].url;
@@ -34,6 +39,10 @@ chrome.tabs.onActivated.addListener(function(tabs){
 	});
 });
 
+var doAnnoyingStuff = function(){
+	alert('Stop looking at FB');
+};
+
 //for second timing
 var myVar = setInterval(myTimer, 1000);
 
@@ -47,12 +56,9 @@ function myTimer() {
 				chrome.storage.local.set({"totalTime": totalTime}, function() {
         			console.log("tried to set totalTime to "  + totalTime);
     			});
-				chrome.storage.local.get("totalTime", function(data){
-					console.log("attampted to grab: " + data.totalTime);
-				});
   
 				if (totalTime > maxTime){
-					alert('Stop looking at FB');
+					doAnnoyingStuff();
 				}
 			}
 			stillOnFb = false;
